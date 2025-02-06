@@ -1,0 +1,295 @@
+.wizard-card {
+    max-width: 900px;
+    margin: 50px auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /*overflow: hidden;*/
+    display: flex;
+    flex-direction: row;
+}
+.sidebar {
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+}
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.step-indicator::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    z-index: 0;
+    transform: translateY(-50%);
+}
+.step-indicator span {
+    width: 40px;
+    height: 40px;
+    background: #f8f9fa;
+    border: 1px solid #007bff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+.step-indicator .active {
+    background: #007bff;
+    color: white;
+    /* border-color: #0056b3; */
+    transform: scale(1.2);
+    /* font-weight: bold; */
+}
+.description {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+.help {
+    font-size: 14px;
+    color: #007bff;
+}
+.content {
+    padding: 30px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.content.active {
+    display: flex;
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+.map-placeholder {
+    width: 100%;
+    height: 500px;
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+.coordinates {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+.coordinates input,
+.coordinates textarea{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background: #f8f9fa;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+.coordinates input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+.multi-option-container {
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    background: #f8f9fa;
+    margin-bottom: 15px;
+    max-height: 150px;
+    overflow-y: auto;
+    position: relative;
+}
+.search-box {
+    width: 100%;
+    height: 50px;
+    padding: 8px 12px;
+    border: none;
+    outline: none;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.selectedItem{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 20px;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+.autocomplete-container {
+    position: relative;
+    width: 100%;
+}
+.autocomplete-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    z-index: 10;
+    max-height: 1000px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+.autocomplete-items div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.autocomplete-items div:last-child {
+    border-bottom: none;
+}
+.autocomplete-items div i {
+    color: #555;
+    margin-right: 10px;
+}
+.autocomplete-items div .text {
+    flex: 1;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.autocomplete-items div .address {
+    font-size: 12px;
+    color: grey;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.autocomplete-items div:hover {
+    background: #0d6efd;
+    color: white;
+}
+.multi-option {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+.multi-option label {
+    padding: 8px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.multi-option input[type="checkbox"] {
+    display: none;
+}
+.multi-option input[type="checkbox"]:checked + label {
+    background: #ffebee;
+    color: #c62828;
+    border-color: #c62828;
+}
+.selected-tag {
+    display: inline-flex;
+    align-items: center;
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+.img-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.img-preview {
+    width: 176px;
+    height: 176px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.img-preview:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 768px) {
+    .wizard-card {
+        flex-direction: column;
+    }
+    .sidebar {
+        order: -1;
+        padding-bottom: 10px;
+    }
+
+    .operational-time-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .operational-time-section select,
+    .operational-time-section input{
+        width: 100%;
+    }
+
+
+}
