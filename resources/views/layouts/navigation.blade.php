@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a href="{{ route('front.index')  }}" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="category.html" class="nav-link">Category</a></li>
+                <li class="nav-item"><a href="{{ route('category.index') }}" class="nav-link">Category</a></li>
                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 @if(\Illuminate\Support\Facades\Auth::check())

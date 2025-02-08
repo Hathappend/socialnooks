@@ -5,12 +5,13 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class SearchResults extends Component
 {
 
-    public ?String $searchQuery;
+    public ?String $searchQuery = null;
     public $latitude;
     public $longitude;
     public ?String $category = null;
@@ -22,11 +23,13 @@ class SearchResults extends Component
     public function mount($searchQuery, $latitude = null, $longitude = null, $category = null): void
     {
         $this->searchQuery = $searchQuery;
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
         $this->category = $category;
 
-        $this->fetchPlaces();
+        if (isset($latitude, $longitude)) {
+            $this->latitude = $latitude;
+            $this->longitude = $longitude;
+            $this->fetchPlaces();
+        }
     }
 
     public function fetchPlaces(): void
@@ -148,6 +151,15 @@ class SearchResults extends Component
 
     public function loadMore(): void
     {
+        $this->fetchPlaces();
+    }
+
+    #[On('updateLocation')]
+    public function updateLocation($lat, $lng)
+    {
+        $this->latitude = $lat;
+        $this->longitude = $lng;
+
         $this->fetchPlaces();
     }
 

@@ -10,7 +10,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 {
     public function getAll(): Collection
     {
-        return Category::all();
+        return Category::whereNotNull('thumbnail')->get();
     }
 
     public function findById(int $id): ?Category

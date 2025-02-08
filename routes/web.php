@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Contributor\PlaceController;
 use App\Http\Controllers\ProfileController;
 use \App\Http\Controllers\FrontController;
@@ -13,16 +14,18 @@ Route::middleware(EnsureIsAuthenticated::class)->group(function () {
     Route::get('/search', [ApiController::class, 'searchPlaces'])->name('search');
     Route::get('/place-detail/id/{placeId}', [ApiController::class, 'placeDetails'])->name('api.place.details');
 
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/category/{category:slug}', [CategoryController::class, 'detail'])->name('category.details');
+
     Route::get('/contrib/add-place', [PlaceController::class, 'addPlaceView'])->name('contrib.place.add');
     Route::post('/contrib/add-place', [PlaceController::class, 'createPlace'])->name('contrib.place.create');
-//    Route::get('/search/autocomplete', \App\Livewire\LocationSearchAutocomplete::class);
+
 });
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
-//Route::get('/admin/category/{category:slug}', [])
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

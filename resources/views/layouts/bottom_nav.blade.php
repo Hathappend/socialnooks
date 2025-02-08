@@ -6,12 +6,12 @@
             <span>Home</span>
         </div>
     </a>
-{{--    <a href="category.html">--}}
-{{--        <div class="nav-item">--}}
-{{--            <i class="fa-solid fa-list"></i>--}}
-{{--            <span>Category</span>--}}
-{{--        </div>--}}
-{{--    </a>--}}
+    <a href="{{ route('category.index') }}">
+        <div class="nav-item">
+            <i class="fa-solid fa-list"></i>
+            <span>Category</span>
+        </div>
+    </a>
     @if(\Illuminate\Support\Facades\Auth::check())
         <div class="nav-item">
             <i class="fa-solid fa-plus"></i>

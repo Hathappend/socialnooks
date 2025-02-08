@@ -19,23 +19,8 @@ class ApiServices
 
     public function searchPlaces($query,  $category, $latitude, $longitude, $nextPageToken)
     {
-        $searchBefore = session('searchParams', []);
 
-//        if (isset($nextPageToken)) {
-//            if (Cache::has('temporary_search') && isset($searchBefore['query']) && $searchBefore['query'] === $query) {
-//                return Cache::get('temporary_search');
-//            }
-//        }
-
-        $results = $this->apiRepository->search($query,  $category, $latitude, $longitude, $nextPageToken);
-
-//        logger()->info('page token Service Parameters:', (array)$nextPageToken);
-
-        if ($results) {
-            Cache::put('temporary_search', $results, now()->addMinutes(600));
-        }
-
-        return $results;
+        return $this->apiRepository->search($query,  $category, $latitude, $longitude, $nextPageToken);
 
     }
 

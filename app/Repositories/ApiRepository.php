@@ -97,11 +97,6 @@ class ApiRepository implements ApiRepositoryInterface
                     ]
                 ];
 
-                if ($nextPageToken) {
-                    $params['pageToken'] = $nextPageToken;
-                }
-
-//                dd($params);
 
                 $data = $this->sendSearchRequest($urlNearby, $params, 'nearby');
 

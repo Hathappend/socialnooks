@@ -1681,6 +1681,7 @@ button {
   overflow: hidden;
   position: relative;
   z-index: 0;
+height: 250px;
 }
 .popular-location .single-location .location-img::before {
   position: absolute;
@@ -1692,13 +1693,17 @@ button {
 }
 .popular-location .single-location .location-img img {
   width: 100%;
+    height: 100%;
   transform: scale(1);
-  transition: all 0.5s ease-out 0s;
+    object-fit: cover;
+    transition: all 0.5s ease-out 0s;
 }
 .popular-location .single-location .location-details {
   position: absolute;
-  left: 45px;
+  left: 40px;
   bottom: -9px;
+    max-width: 80%;
+    word-wrap: break-word;
   -webkit-transition: all 0.4s ease-out 0s;
   -moz-transition: all 0.4s ease-out 0s;
   -ms-transition: all 0.4s ease-out 0s;
@@ -1707,8 +1712,9 @@ button {
 }
 .popular-location .single-location .location-details p {
   color: #fff;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 700;
+    line-height: 1.4;
 }
 .popular-location .single-location .location-details .location-btn {
   padding: 10px 20px;
