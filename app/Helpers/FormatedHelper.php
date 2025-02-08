@@ -43,11 +43,11 @@ class FormatedHelper
         if (!$priceRange) {
             $place['priceDisplay'] = '<span>No Available Price Range</span>';
         } elseif (!isset($priceRange['startPrice'])) {
-            $place['priceDisplay'] = self::priceWithoutZeros($priceRange['endPrice']['units']) . ' average';
+            $place['priceDisplay'] = self::priceWithoutZeros($priceRange['endPrice']['units'] ?? 0) . ' average';
         } elseif (!isset($priceRange['endPrice'])) {
-            $place['priceDisplay'] = self::priceWithoutZeros($priceRange['startPrice']['units']) . ' average';
+            $place['priceDisplay'] = self::priceWithoutZeros($priceRange['startPrice']['units'] ?? 0) . ' average';
         } else {
-            $place['priceDisplay'] = self::priceWithoutZeros($priceRange['startPrice']['units']) . ' - ' . self::priceWithoutZeros($priceRange['endPrice']['units']);
+            $place['priceDisplay'] = self::priceWithoutZeros($priceRange['startPrice']['units'] ?? 0) . ' - ' . self::priceWithoutZeros($priceRange['endPrice']['units'] ?? 0);
         }
 
         return $place;
@@ -100,13 +100,13 @@ class FormatedHelper
     public static function starsFormating(?float $stars): ?string
     {
         if (isset($stars)){
-            if ($stars > 1 && $stars < 2) {
+            if ($stars >= 1 && $stars < 2) {
                 return "★ ☆ ☆ ☆ ☆";
-            }elseif ($stars > 2 && $stars < 3 ) {
+            }elseif ($stars >= 2 && $stars < 3 ) {
                 return "★ ★ ☆ ☆ ☆";
-            }elseif ($stars > 3 && $stars < 4 ) {
+            }elseif ($stars >= 3 && $stars < 4 ) {
                 return "★ ★ ★ ☆ ☆";
-            }elseif ($stars > 4 && $stars < 5) {
+            }elseif ($stars >= 4 && $stars < 5) {
                 return "★ ★ ★ ★ ☆";
             }elseif ($stars == 5) {
                 return "★ ★ ★ ★ ★";

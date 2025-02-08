@@ -437,7 +437,8 @@ iframe {
 }
 .modal-product img {
     width: 100%;
-    height: auto;
+    height: 300px;
+    object-fit: cover;
     border-radius: 12px;
     margin-bottom: 1rem;
 }
@@ -493,6 +494,7 @@ iframe {
     border-color: #6c757d;
 }
 
+
 .file-list {
     margin-top: 0.5rem;
     text-align: left;
@@ -505,18 +507,23 @@ iframe {
 
 .file-item {
     background-color: #fff;
-    padding: 5px 10px;
-    margin-bottom: 5px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
     border-radius: 6px;
     border: 1px solid #dee2e6;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    gap: 10px;
 }
 
-.file-item:last-child {
-    margin-bottom: 0;
+.file-name {
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+    white-space: normal;
+    max-width: 80%;
 }
 
 .remove-btn {
@@ -526,6 +533,7 @@ iframe {
     cursor: pointer;
     font-size: 14px;
     transition: color 0.2s;
+    margin-left: auto;
 }
 
 .remove-btn:hover {

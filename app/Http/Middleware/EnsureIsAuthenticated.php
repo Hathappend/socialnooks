@@ -21,6 +21,8 @@ class EnsureIsAuthenticated
             session(['url.intended' => url()->current()]);
             $intendedUrl = session('url.intended', route('front.index'));
 
+
+
             if ($request->url() !== $intendedUrl) {
                 return redirect()->intended($intendedUrl);
             }

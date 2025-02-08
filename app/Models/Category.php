@@ -12,7 +12,8 @@ class Category extends Model
     use SoftDeletes;
 
     protected $table = 'categories';
-    protected $fillable = ['name', 'slug'];
+    public $timestamps = false;
+    protected $fillable = ['name', 'slug', 'thumbnail'];
 
     public function setNameAttribute($value): void
     {

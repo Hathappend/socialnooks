@@ -40,7 +40,7 @@ class ApiController extends Controller
 
         $existsInDatabase = $this->placeService->getPlaceFromCode($placeId);
 
-        if ($existsInDatabase) {
+        if ($existsInDatabase && isset($existsInDatabase['user_id'])) {
 
             $photos = $existsInDatabase->photos;
             $facilities = $existsInDatabase->facilities;

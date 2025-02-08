@@ -25,6 +25,7 @@ class PlaceRepository implements PlaceRepositoryInterface
     {
         return Place::with(['category', 'reviews'])
             ->where('status', 'approved')
+            ->whereNotNull('user_id')
             ->get();
     }
 

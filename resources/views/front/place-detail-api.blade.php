@@ -14,10 +14,10 @@
                     <div class="swiper-wrapper">
 
                         @forelse($details['photoUrls'] as $photo)
-                            <div class="swiper-slide">
-                                <img src="{{ $photo }}" class=""  alt="">
-                                <div class="offer_name"><a href="single_listing.html">{{ $details['displayName']['text'] }}</a></div>
-                            </div>
+{{--                            <div class="swiper-slide">--}}
+{{--                                <img src="{{ $photo }}" class=""  alt="">--}}
+{{--                                <div class="offer_name"><a href="single_listing.html">{{ $details['displayName']['text'] }}</a></div>--}}
+{{--                            </div>--}}
                         @empty
                             <div class="swiper-slide">
                                 <img src="https://semantic-ui.com/images/wireframe/image.png" class=""  alt="">
@@ -270,92 +270,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="chequebook" role="tabpanel" aria-labelledby="chequebook-tab">
 
-                                    <div class="review-section">
-
-                                        <div class="text-center mb-4">
-                                            <h1 class="display-4"><b>{{ $details['rating'] }}</b></h1>
-                                            <div class="text-warning star-header">
-                                                <span>{{ \App\Helpers\FormatedHelper::starsFormating($details['rating']) }}</span>
-                                            </div>
-                                            <p class="text-muted">based on {{$details['userRatingCount'] }} reviews</p>
-                                        </div>
-
-                                        @php
-                                        $ratingPercent = \App\Helpers\FormatedHelper::getPercentFromUserRating($details['reviews'])
-                                        @endphp
-
-                                        <div class="ratings-breakdown mb-4">
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <span class="text-muted mr-3">Excellent</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{$ratingPercent['excellent']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <span class="text-muted mr-3">Good</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{$ratingPercent['good']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <span class="text-muted mr-3">Average</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{$ratingPercent['average']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <span class="text-muted mr-3">Below Avg</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{$ratingPercent['below_avg']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                                <span class="text-muted mr-3">Poor</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-dark" role="progressbar" style="width: {{$ratingPercent['poor']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            @if(\Illuminate\Support\Facades\Auth::check())
-                                                <button class="btn btn-primary w-100" data-toggle="modal" data-target="#writeReviewModal">Write a Review</button>
-                                            @else
-                                                <div class="text-center">
-                                                    <p>Want to write a review? <a href="{{ route('login') }}" class="text-primary">Login </a>First</p>
-                                                </div>
-                                            @endif
-
-                                        </div>
-                                        <div class="separator"></div>
-                                        <div class="reviews-list">
-
-                                            @forelse($details['reviews'] ?? [] as $review)
-
-                                                <div class="review-item">
-                                                    <div class="d-flex align-items-start">
-                                                        <img src="{{ $review['authorAttribution']['photoUri'] }}" alt="User" class="rounded-circle profile-img">
-                                                        <div style="width: 100%;">
-                                                            <h6>{{ $review['authorAttribution']['displayName'] }}</h6>
-                                                            <div class="rating-and-time d-flex justify-content-between" >
-                                                                <div class="text-warning">{{ \App\Helpers\FormatedHelper::starsFormating($review['rating']) }}</div>
-                                                                <small>{{ \Carbon\Carbon::parse($review['publishTime'])->diffForHumans() }}</small>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p>{{ $review['text']['text'] }}</p>
-                                                    {{--                                                        <div class="review-images">--}}
-                                                    {{--                                                            <img src="https://uwitan.id/wp-content/uploads/2018/06/1.-Furniture-Kursi-Classic-Chair-Natural.jpeg" alt="Review Image 1" data-toggle="modal" data-target="#imageZoomModal">--}}
-                                                    {{--                                                            <img src="https://uwitan.id/wp-content/uploads/2018/06/1.-Furniture-Kursi-Classic-Chair-Natural.jpeg" alt="Review Image 1" data-toggle="modal" data-target="#imageZoomModal">--}}
-                                                    {{--                                                            <img src="https://uwitan.id/wp-content/uploads/2018/06/1.-Furniture-Kursi-Classic-Chair-Natural.jpeg" alt="Review Image 1" data-toggle="modal" data-target="#imageZoomModal">--}}
-                                                    {{--                                                            <img src="https://uwitan.id/wp-content/uploads/2018/06/1.-Furniture-Kursi-Classic-Chair-Natural.jpeg" alt="Review Image 1" data-toggle="modal" data-target="#imageZoomModal">--}}
-                                                    {{--                                                        </div>--}}
-                                                </div>
-                                                <hr>
-
-                                            @empty
-                                            @endforelse
-
-                                        </div>
-                                        <!-- end review list -->
-                                    </div>
+                                    @livewire('review-section', ['details' => $details])
                                     <!-- end review section -->
                                 </div>
                             </div>
@@ -368,39 +283,8 @@
             </div>
             <!-- Modal for Write a Review -->
 
-            <div class="modal fade" id="writeReviewModal" tabindex="-1" role="dialog" aria-labelledby="writeReviewModal" aria-hidden="true" >
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="writeReviewModalLabel">Write a Review</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="modal-section modal-product">
-                                <img src="https://uwitan.id/wp-content/uploads/2018/06/1.-Furniture-Kursi-Classic-Chair-Natural.jpeg" alt="Product" class="img-fluid">
-                                <h6>Bjorg Chair White Plastic</h6>
-                                <p>Armchair in polypropylene. Seat and legs in solid natural beech wood.</p>
-                            </div>
-                            <div class="modal-section">
-                                <label for="uploadPhoto" class="form-label">Add Photo or Video</label>
-                                <div id="uploadPhoto" class="upload-section">
-                                    <span>Click here to upload</span>
-                                </div>
-                            </div>
-                            <div class="modal-section review-text">
-                                <label for="reviewText" class="form-label">Write your Review</label>
-                                <textarea id="reviewText" class="form-control" rows="4" placeholder="Would you like to write anything about this product?"></textarea>
-                                <small class="text-muted d-block text-end">400 characters remaining</small>
-                            </div>
-                        </div>
-                        <div class="modal-footer" style="border: 1px solid bla;">
-                            <button type="button" class="btn btn-primary w-100">Submit Review</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @livewire('submit-review', ['placeDetail' => $details])
+            @livewire('edit-review', ['placeDetail' => $details])
 
             <!-- Modal for Zoomed Image -->
             <div class="modal fade" id="imageZoomModal" tabindex="-1" aria-labelledby="imageZoomModalLabel" aria-hidden="true" >
@@ -426,6 +310,7 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('js/interactive-stars.js') }}"></script>
     <script>
         window.initMap = function () {
             const position = {
@@ -482,6 +367,69 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("[data-upload-container]").forEach((container) => {
+                const uploadPhotoBtn = container.querySelector(".uploadPhoto");
+                const fileInput = container.querySelector(".fileInput");
+                const fileListContainer = container.querySelector(".fileList");
+                const uploadText = container.querySelector(".uploadText");
+
+                if (uploadPhotoBtn && fileInput) {
+                    uploadPhotoBtn.addEventListener("click", function () {
+                        fileInput.click();
+                    });
+
+                    fileInput.addEventListener("change", function () {
+                        fileListContainer.innerHTML = "";
+
+                        const files = fileInput.files;
+
+                        if (files.length > 0) {
+                            Array.from(files).forEach((file, index) => {
+                                const fileItem = document.createElement("div");
+                                fileItem.className = "file-item";
+
+                                const fileName = document.createElement("span");
+                                fileName.textContent = file.name;
+
+                                const removeBtn = document.createElement("button");
+                                removeBtn.textContent = "Remove";
+                                removeBtn.className = "remove-btn";
+                                removeBtn.addEventListener("click", function () {
+                                    removeFile(fileInput, index);
+                                });
+
+                                fileItem.appendChild(fileName);
+                                fileItem.appendChild(removeBtn);
+                                fileListContainer.appendChild(fileItem);
+                            });
+                        } else {
+                            uploadText.textContent = "Click here to upload (.jpg .png .jpeg)";
+                        }
+                    });
+                }
+            });
+
+            function removeFile(input, index) {
+                const dataTransfer = new DataTransfer();
+
+                Array.from(input.files).forEach((file, i) => {
+                    if (i !== index) {
+                        dataTransfer.items.add(file);
+                    }
+                });
+
+                input.files = dataTransfer.files;
+
+                // Trigger event agar daftar file diperbarui
+                const event = new Event('change');
+                input.dispatchEvent(event);
+            }
+        });
+    </script>
+
 
 
 

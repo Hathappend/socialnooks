@@ -17,16 +17,16 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('slug')->nullable();
             $table->longText('description')->nullable();
-            $table->longText('address');
-            $table->decimal('latitude', 18,15);
-            $table->decimal('longitude',18,15);
+            $table->longText('address')->nullable();
+            $table->decimal('latitude', 18,15)->nullable();
+            $table->decimal('longitude',18,15)->nullable();
             $table->string('thumbnail')->nullable();
-            $table->unsignedBigInteger('start_price');
-            $table->unsignedBigInteger('end_price');
-            $table->string('phone_number', 14);
+            $table->unsignedBigInteger('start_price')->nullable();
+            $table->unsignedBigInteger('end_price')->nullable();
+            $table->string('phone_number', 14)->nullable();
             $table->enum('status', ['pending', 'approved'])->default('pending');
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
 
             $table->softDeletes();
 

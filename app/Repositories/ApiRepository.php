@@ -191,7 +191,7 @@ class ApiRepository implements ApiRepositoryInterface
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'X-Goog-Api-Key' => $this->apiKey,
-                'X-Goog-FieldMask' => 'id,displayName,formattedAddress,location,priceRange,rating,userRatingCount,reviews,regularOpeningHours,internationalPhoneNumber,nationalPhoneNumber,paymentOptions,delivery,dineIn,takeout,reservable,parkingOptions,liveMusic,outdoorSeating,restroom,allowsDogs,goodForChildren,goodForGroups,servesBeer,servesBreakfast,servesBrunch,servesCocktails,servesCoffee,servesDessert,servesDinner,servesLunch,servesVegetarianFood,servesWine,editorialSummary,accessibilityOptions,photos',
+                'X-Goog-FieldMask' => 'id,displayName,formattedAddress,location,priceRange,rating,userRatingCount,reviews,regularOpeningHours,internationalPhoneNumber,nationalPhoneNumber,paymentOptions,delivery,dineIn,takeout,reservable,parkingOptions,liveMusic,outdoorSeating,restroom,allowsDogs,goodForChildren,goodForGroups,servesBeer,servesBreakfast,servesBrunch,servesCocktails,servesCoffee,servesDessert,servesDinner,servesLunch,servesVegetarianFood,servesWine,editorialSummary,accessibilityOptions,photos', //
             ])->get($url);
 
             if ($response->failed()) {

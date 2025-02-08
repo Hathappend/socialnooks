@@ -269,98 +269,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="chequebook" role="tabpanel" aria-labelledby="chequebook-tab">
 
-                                    <div class="review-section">
-
-                                        <div class="text-center mb-4">
-                                            <h1 class="display-4"><b>{{ $details['rating'] }}</b></h1>
-                                            <div class="text-warning star-header">
-                                                <span>{{ \App\Helpers\FormatedHelper::starsFormating($details['rating']) }}</span>
-                                            </div>
-                                            <p class="text-muted">based on {{$details['userRatingCount'] }} reviews</p>
-                                        </div>
-
-                                        @php
-                                        $ratingPercent = \App\Helpers\FormatedHelper::getPercentFromUserRating($details['reviews'])
-                                        @endphp
-
-                                        <div class="ratings-breakdown mb-4">
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <span class="text-muted mr-3">Excellent</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{$ratingPercent['excellent']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <span class="text-muted mr-3">Good</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{$ratingPercent['good']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <span class="text-muted mr-3">Average</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{$ratingPercent['average']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <span class="text-muted mr-3">Below Avg</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{$ratingPercent['below_avg']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                                <span class="text-muted mr-3">Poor</span>
-                                                <div class="progress w-100 ms-3">
-                                                    <div class="progress-bar bg-dark" role="progressbar" style="width: {{$ratingPercent['poor']}}%;"></div>
-                                                </div>
-                                            </div>
-                                            @if(\Illuminate\Support\Facades\Auth::check())
-                                                <button class="btn btn-primary w-100" data-toggle="modal" data-target="#writeReviewModal">Write a Review</button>
-                                            @else
-                                                <div class="text-center">
-                                                    <p>Want to write a review? <a href="{{ route('login') }}" class="text-primary">Login </a>First</p>
-                                                </div>
-                                            @endif
-
-                                        </div>
-                                        <div class="separator"></div>
-                                        <div class="reviews-list">
-
-
-                                            @forelse($details['reviews'] ?? [] as $reviewIndex => $review)
-                                                <div class="review-item">
-                                                    <div class="d-flex align-items-start">
-                                                        <img src="{{ $review['user']['photo'] }}" alt="User" class="rounded-circle profile-img">
-                                                        <div style="width: 100%;">
-                                                            <h6>{{ $review['user']['name'] }}</h6>
-                                                            <div class="rating-and-time d-flex justify-content-between">
-                                                                <div class="text-warning">{{ \App\Helpers\FormatedHelper::starsFormating($review['rating']) }}</div>
-                                                                <small>{{ \Carbon\Carbon::parse($review['created_at'])->diffForHumans() }}</small>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p>{{ $review['text_review'] }}</p>
-                                                    <div class="review-images">
-                                                        @forelse($review['photos'] ?? [] as $photoIndex => $photo)
-                                                            <img
-                                                                src="{{ asset("storage/reviews/{$photo['photo']}") }}"
-                                                                alt="Review {{ $details['name'] }} {{$loop->iteration}}"
-                                                                class="zoomable-image"
-                                                                data-photo="{{ asset("storage/reviews/{$photo['photo']}") }}"
-                                                            >
-                                                        @empty
-                                                        @endforelse
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                            @empty
-                                            @endforelse
-
-                                            <!-- Modal (Hanya Satu Modal untuk Semua Gambar) -->
-
-                                        </div>
-                                        <!-- end review list -->
-                                    </div>
+                                    @livewire('review-section', ['details' => $details])
                                     <!-- end review section -->
                                 </div>
                             </div>
@@ -373,7 +282,9 @@
             </div>
             <!-- Modal for Write a Review -->
 
-            @livewire('submit-review')
+            @livewire('submit-review', ['placeDetail' => $details])
+            @livewire('edit-review', ['placeDetail' => $details])
+
 
             <div class="modal fade" id="imageZoomModal" tabindex="-1" aria-labelledby="imageZoomModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -399,6 +310,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('js/interactive-stars.js') }}"></script>
+
     <script>
         window.initMap = function () {
             const position = {
@@ -473,80 +385,65 @@
     </script>
 
     <script>
-        document.getElementById("uploadPhoto").addEventListener("click", function () {
-            document.getElementById("fileInput").click();
-        });
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("[data-upload-container]").forEach((container) => {
+                const uploadPhotoBtn = container.querySelector(".uploadPhoto");
+                const fileInput = container.querySelector(".fileInput");
+                const fileListContainer = container.querySelector(".fileList");
+                const uploadText = container.querySelector(".uploadText");
 
-        document.getElementById("fileInput").addEventListener("change", function () {
-            const fileListContainer = document.getElementById("fileList");
-            fileListContainer.innerHTML = "";
-
-            const files = this.files;
-
-            if (files.length > 0) {
-                Array.from(files).forEach((file, index) => {
-                    const fileItem = document.createElement("div");
-                    fileItem.className = "file-item";
-
-                    const fileName = document.createElement("span");
-                    fileName.textContent = file.name;
-
-                    const removeBtn = document.createElement("button");
-                    removeBtn.textContent = "Remove";
-                    removeBtn.className = "remove-btn";
-                    removeBtn.addEventListener("click", function () {
-                        removeFile(index);
+                if (uploadPhotoBtn && fileInput) {
+                    uploadPhotoBtn.addEventListener("click", function () {
+                        fileInput.click();
                     });
 
-                    fileItem.appendChild(fileName);
-                    fileItem.appendChild(removeBtn);
-                    fileListContainer.appendChild(fileItem);
-                });
-            } else {
-                document.getElementById("uploadText").textContent = "Click here to upload";
-            }
-        });
+                    fileInput.addEventListener("change", function () {
+                        fileListContainer.innerHTML = "";
 
-        // Fungsi untuk menghapus file
-        function removeFile(index) {
-            const input = document.getElementById("fileInput");
-            const dataTransfer = new DataTransfer();
+                        const files = fileInput.files;
 
-            // Tambahkan semua file kecuali yang dihapus
-            Array.from(input.files)
-                .forEach((file, i) => {
+                        if (files.length > 0) {
+                            Array.from(files).forEach((file, index) => {
+                                const fileItem = document.createElement("div");
+                                fileItem.className = "file-item";
+
+                                const fileName = document.createElement("span");
+                                fileName.textContent = file.name;
+
+                                const removeBtn = document.createElement("button");
+                                removeBtn.textContent = "Remove";
+                                removeBtn.className = "remove-btn";
+                                removeBtn.addEventListener("click", function () {
+                                    removeFile(fileInput, index);
+                                });
+
+                                fileItem.appendChild(fileName);
+                                fileItem.appendChild(removeBtn);
+                                fileListContainer.appendChild(fileItem);
+                            });
+                        } else {
+                            uploadText.textContent = "Click here to upload (.jpg .png .jpeg)";
+                        }
+                    });
+                }
+            });
+
+            function removeFile(input, index) {
+                const dataTransfer = new DataTransfer();
+
+                Array.from(input.files).forEach((file, i) => {
                     if (i !== index) {
                         dataTransfer.items.add(file);
                     }
                 });
 
-            input.files = dataTransfer.files;
+                input.files = dataTransfer.files;
 
-            // Trigger event untuk memperbarui tampilan daftar file
-            const event = new Event('change');
-            input.dispatchEvent(event);
-        }
-
-    </script>
-
-    <script>
-        document.addEventListener('livewire:init', function () {
-            Livewire.on('reviewAdded', () => {
-
-                var modalElement = document.getElementById('writeReviewModal');
-                var modalInstance = bootstrap.Modal.getInstance(modalElement);
-                if (modalInstance) {
-                    modalInstance.hide();
-                }
-
-                // Aktifkan tab chequebook
-                var chequebookTab = new bootstrap.Tab(document.getElementById('chequebook-tab'));
-                chequebookTab.show();
-            });
+                // Trigger event agar daftar file diperbarui
+                const event = new Event('change');
+                input.dispatchEvent(event);
+            }
         });
     </script>
-
-
-
 
 @endsection

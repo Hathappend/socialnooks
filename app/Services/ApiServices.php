@@ -41,7 +41,7 @@ class ApiServices
 
     public function getPlaceDetail(String $placeId)
     {
-        return Cache::remember($placeId, now()->addMinutes(10080), function () use ($placeId) {
+        return Cache::remember($placeId, now()->addDays(30), function () use ($placeId) {
             return $this->apiRepository->getPlaceDetail($placeId);
         });
     }

@@ -15,54 +15,51 @@ class PlaceService
         $this->placeRepository = $placeRepository;
     }
 
-    public function create(array $data): bool
+    public function create(array $data, string $params): bool
     {
 
         $saveToPlace = [
             'place_unique_code' => $data['place_unique_code'],
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'address' => $data['address'],
-            'latitude' => $data['latitude'],
-            'longitude' => $data['longitude'],
-            'thumbnail' => $data['photos'][0]['photo'],
-            'start_price' => $data['start_price'],
-            'end_price' => $data['end_price'],
-            'phone_number' => $data['phone_number'],
-            'category_id' => $data['category'],
-            'user_id' => Auth::user()->id,
+            'name' => $data['name'] ?? null,
+            'description' => $data['description'] ?? null,
+            'address' => $data['address'] ?? null,
+            'latitude' => $data['latitude'] ?? null,
+            'longitude' => $data['longitude'] ?? null,
+            'thumbnail' => $data['photos'][0]['photo'] ?? null,
+            'start_price' => $data['start_price'] ?? null,
+            'end_price' => $data['end_price'] ?? null,
+            'phone_number' => $data['phone_number'] ?? null,
+            'category_id' => $data['category'] ?? null,
+            $params === "API" ? null : 'user_id' => isset($data['name']) ? Auth::user()->id : null,
+            $params !== "API" ? null : 'status' => "approved",
         ];
 
         $save = $this->placeRepository->save($saveToPlace);
 
-        foreach ($data['selected_facilities'] as $facility) {
+        foreach ($data['selected_facilities'] ?? [] as $facility) {
             $save->facilities()->attach($facility);
         }
 
-        foreach ($data['selected_services'] as $service) {
+        foreach ($data['selected_services'] ?? [] as $service) {
             $save->services()->attach($service);
         }
 
-        foreach ($data['selected_payments'] as $payment) {
+        foreach ($data['selected_payments'] ?? [] as $payment) {
             $save->payments()->attach($payment);
         }
 
-        foreach ($data['selected_accessibilities'] as $accessibility) {
+        foreach ($data['selected_accessibilities'] ?? [] as $accessibility) {
             $save->accessibilities()->attach($accessibility);
         }
 
-        foreach ($data['selected_facilities'] as $facility) {
+        foreach ($data['selected_facilities'] ?? [] as $facility) {
             $save->facilities()->attach($facility);
         }
 
-//        dd($data['operational_hours']);
 
+        $saveToOperationalTime = $save->operationalTimes()->createMany($data['operational_hours'] ?? []);
 
-        $saveToOperationalTime = $save->operationalTimes()->createMany($data['operational_hours']);
-
-//        dd($data['photos']);
-
-        $savedToPlacePhoto = $save->photos()->createMany($data['photos']);
+        $savedToPlacePhoto = $save->photos()->createMany($data['photos'] ?? []);
 
         if ($savedToPlacePhoto && $saveToOperationalTime) {
             return true;
