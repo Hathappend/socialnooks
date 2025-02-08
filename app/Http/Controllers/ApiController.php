@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\FormatedHelper;
 use App\Models\Place;
+use App\Services\AccessibilityService;
 use App\Services\ApiServices;
 use App\Services\CategoryService;
 use App\Services\FacilityService;
@@ -25,18 +26,21 @@ class ApiController extends Controller
     private FacilityService $facilityService;
     private ServiceService $serviceService;
     private PaymentService $paymentService;
+    private AccessibilityService $accessibilityService;
 
 
     public function __construct(ApiServices $apiServices,
                                 PlaceService $placeService,
                                 FacilityService $facilityService,
                                 ServiceService $serviceService,
-                                PaymentService $paymentService){
+                                PaymentService $paymentService,
+                                AccessibilityService $accessibilityService){
         $this->apiServices = $apiServices;
         $this->placeService = $placeService;
         $this->facilityService = $facilityService;
         $this->serviceService = $serviceService;
         $this->paymentService = $paymentService;
+        $this->accessibilityService = $accessibilityService;
     }
 
     public function searchPlaces(Request $request) : \Illuminate\Http\JsonResponse|View
@@ -92,8 +96,9 @@ class ApiController extends Controller
                 $facilitiesDb = $this->facilityService->getFacilities()->toArray();
                 $servicesDb = $this->serviceService->getServices()->toArray();
                 $paymentsDb = $this->paymentService->getPayments()->toArray();
+                $accessibilitiesDb = $this->accessibilityService->getAccessibilities()->toArray();
 
-                return view('front.place-detail-api', compact('details', 'facilitiesDb', 'servicesDb','paymentsDb'));
+                return view('front.place-detail-api', compact('details', 'facilitiesDb', 'servicesDb','paymentsDb', 'accessibilitiesDb'));
             } catch (\Exception $exception) {
 
                 abort(404, 'Not Found');

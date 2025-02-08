@@ -12,7 +12,7 @@ class Accessibility extends Model
 
     protected $table = 'accessibilities';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'icon'];
 
     public function places(): BelongsToMany
     {

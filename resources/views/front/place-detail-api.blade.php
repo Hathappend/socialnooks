@@ -249,7 +249,12 @@
                                             @forelse($details['accessibilities'] ?? [] as $accessibility)
 
                                                 <div class="facility-item">
-                                                    <i class="fas fa-wheelchair"></i>
+                                                    @foreach($accessibilitiesDb as $db)
+                                                        @if($db['name'] == \Illuminate\Support\Str::headline((string)$accessibility))
+                                                            <img src="{{ asset("storage/{$db['icon']}") }}" alt="">
+                                                            @break
+                                                        @endif
+                                                    @endforeach
                                                     <span>{{ $accessibility }}</span>
                                                 </div>
 
