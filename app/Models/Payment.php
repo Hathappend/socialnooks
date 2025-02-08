@@ -12,7 +12,7 @@ class Payment extends Model
 
     protected $table = 'payments';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'icon'];
 
     public function places(): BelongsTo
     {

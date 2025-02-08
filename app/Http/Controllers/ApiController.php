@@ -7,6 +7,7 @@ use App\Models\Place;
 use App\Services\ApiServices;
 use App\Services\CategoryService;
 use App\Services\FacilityService;
+use App\Services\PaymentService;
 use App\Services\PlaceService;
 use App\Services\ServiceService;
 use Illuminate\Http\Request;
@@ -21,22 +22,21 @@ class ApiController extends Controller
 {
     private ApiServices $apiServices;
     private PlaceService $placeService;
-    private CategoryService $categoryService;
     private FacilityService $facilityService;
-
     private ServiceService $serviceService;
+    private PaymentService $paymentService;
 
 
     public function __construct(ApiServices $apiServices,
                                 PlaceService $placeService,
-                                CategoryService $categoryService,
                                 FacilityService $facilityService,
-                                ServiceService $serviceService){
+                                ServiceService $serviceService,
+                                PaymentService $paymentService){
         $this->apiServices = $apiServices;
         $this->placeService = $placeService;
-        $this->categoryService = $categoryService;
         $this->facilityService = $facilityService;
         $this->serviceService = $serviceService;
+        $this->paymentService = $paymentService;
     }
 
     public function searchPlaces(Request $request) : \Illuminate\Http\JsonResponse|View
@@ -91,8 +91,9 @@ class ApiController extends Controller
 
                 $facilitiesDb = $this->facilityService->getFacilities()->toArray();
                 $servicesDb = $this->serviceService->getServices()->toArray();
+                $paymentsDb = $this->paymentService->getPayments()->toArray();
 
-                return view('front.place-detail-api', compact('details', 'facilitiesDb', 'servicesDb'));
+                return view('front.place-detail-api', compact('details', 'facilitiesDb', 'servicesDb','paymentsDb'));
             } catch (\Exception $exception) {
 
                 abort(404, 'Not Found');

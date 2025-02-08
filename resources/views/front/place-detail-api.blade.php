@@ -153,7 +153,12 @@
                                             @forelse($details['paymentOptions'] ?? [] as $paymentOption)
 
                                                 <div class="facility-item">
-                                                    <i class="fas fa-money-bill-wave"></i>
+                                                    @foreach($paymentsDb as $db)
+                                                        @if($db['name'] == \Illuminate\Support\Str::headline((string)$paymentOption))
+                                                            <img src="{{ asset("storage/{$db['icon']}") }}" alt="">
+                                                            @break
+                                                        @endif
+                                                    @endforeach
                                                     <span>{{$paymentOption}}</span>
                                                 </div>
 
