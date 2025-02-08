@@ -21,7 +21,7 @@ class FrontController extends Controller
     {
         $data = $this->frontService->getFrontPageData();
 
-        if (Auth::check() && !Auth::user()->hasVerifiedEmail()) {
+        if (Auth::check() && !Auth::user()->hasVerifiedEmail() && !(Auth::user()->role == 'admin')) {
             return redirect()->route('verification.notice');
         }
 

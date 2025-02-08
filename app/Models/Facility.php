@@ -12,7 +12,7 @@ class Facility extends Model
 
     protected $table = 'facilities';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'icon'];
 
     public function places(): BelongsToMany
     {
