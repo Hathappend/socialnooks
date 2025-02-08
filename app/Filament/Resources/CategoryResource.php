@@ -21,7 +21,9 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+
+    protected static ?string $navigationGroup = 'Master';
 
     public static function form(Form $form): Form
     {
@@ -44,8 +46,8 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                ->searchable()
-                ->formatStateUsing(fn ($state): string => Str::headline($state)),
+                    ->searchable()
+                    ->formatStateUsing(fn ($state): string => Str::headline($state)),
 
                 ImageColumn::make('thumbnail')
             ])

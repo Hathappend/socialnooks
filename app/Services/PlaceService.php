@@ -15,7 +15,7 @@ class PlaceService
         $this->placeRepository = $placeRepository;
     }
 
-    public function create(array $data, string $params): bool
+    public function create(array $data, string $params = 'db'): bool
     {
 
         $saveToPlace = [

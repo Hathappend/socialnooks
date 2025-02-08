@@ -46,7 +46,7 @@ class PlaceController extends Controller
         foreach ($data['photos'] as $photo) {
 
             $fileName = $place_unique_code . '_' . Str::ulid() . '.' . $photo->extension();
-            $photo->storeAs('places', $fileName, 'public');
+            $photo->storeAs('places', 'places/'.$fileName, 'public');
 
             $storedPhotos[] = ['photo' => $fileName];
         }

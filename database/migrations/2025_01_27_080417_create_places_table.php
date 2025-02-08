@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('start_price')->nullable();
             $table->unsignedBigInteger('end_price')->nullable();
             $table->string('phone_number', 14)->nullable();
-            $table->enum('status', ['pending', 'approved'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->foreignId('category_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
 
