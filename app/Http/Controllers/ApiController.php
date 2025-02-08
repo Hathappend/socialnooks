@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Helpers\FormatedHelper;
 use App\Models\Place;
 use App\Services\ApiServices;
+use App\Services\CategoryService;
+use App\Services\FacilityService;
 use App\Services\PlaceService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -18,10 +20,19 @@ class ApiController extends Controller
 {
     private ApiServices $apiServices;
     private PlaceService $placeService;
+    private CategoryService $categoryService;
 
-    public function __construct(ApiServices $apiServices, PlaceService $placeService){
+    private FacilityService $facilityService;
+
+
+    public function __construct(ApiServices $apiServices,
+                                PlaceService $placeService,
+                                CategoryService $categoryService,
+                                FacilityService $facilityService){
         $this->apiServices = $apiServices;
         $this->placeService = $placeService;
+        $this->categoryService = $categoryService;
+        $this->facilityService = $facilityService;
     }
 
     public function searchPlaces(Request $request) : \Illuminate\Http\JsonResponse|View
@@ -74,7 +85,9 @@ class ApiController extends Controller
                 $details = FormatedHelper::ratingFormating($details);
                 $details = FormatedHelper::placeKeysFormatting($details);
 
-                return view('front.place-detail-api', compact('details'));
+                $facilitiesDb = $this->facilityService->getFacilities()->toArray();
+
+                return view('front.place-detail-api', compact('details', 'facilitiesDb'));
             } catch (\Exception $exception) {
 
                 abort(404, 'Not Found');
