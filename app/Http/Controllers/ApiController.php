@@ -8,6 +8,7 @@ use App\Services\ApiServices;
 use App\Services\CategoryService;
 use App\Services\FacilityService;
 use App\Services\PlaceService;
+use App\Services\ServiceService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -21,18 +22,21 @@ class ApiController extends Controller
     private ApiServices $apiServices;
     private PlaceService $placeService;
     private CategoryService $categoryService;
-
     private FacilityService $facilityService;
+
+    private ServiceService $serviceService;
 
 
     public function __construct(ApiServices $apiServices,
                                 PlaceService $placeService,
                                 CategoryService $categoryService,
-                                FacilityService $facilityService){
+                                FacilityService $facilityService,
+                                ServiceService $serviceService){
         $this->apiServices = $apiServices;
         $this->placeService = $placeService;
         $this->categoryService = $categoryService;
         $this->facilityService = $facilityService;
+        $this->serviceService = $serviceService;
     }
 
     public function searchPlaces(Request $request) : \Illuminate\Http\JsonResponse|View
@@ -86,8 +90,9 @@ class ApiController extends Controller
                 $details = FormatedHelper::placeKeysFormatting($details);
 
                 $facilitiesDb = $this->facilityService->getFacilities()->toArray();
+                $servicesDb = $this->serviceService->getServices()->toArray();
 
-                return view('front.place-detail-api', compact('details', 'facilitiesDb'));
+                return view('front.place-detail-api', compact('details', 'facilitiesDb', 'servicesDb'));
             } catch (\Exception $exception) {
 
                 abort(404, 'Not Found');

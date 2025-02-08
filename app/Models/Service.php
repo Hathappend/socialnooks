@@ -11,7 +11,7 @@ class Service extends Model
     use softDeletes;
 
     protected $table = 'services';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'icon'];
 
     public function places(): belongsToMany
     {
