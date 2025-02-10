@@ -28,5 +28,10 @@ class FrontController extends Controller
         return view('front.index', $data);
     }
 
+    public function about(): View
+    {
+        return view('front.about');
+    }
+
 
 }

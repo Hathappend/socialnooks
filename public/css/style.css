@@ -176,6 +176,34 @@ img {
      outline: 0;
 }
 
+.error-text {
+    font-size: 0.8rem; /* Sekitar 14px */
+    color: #dc3545; /* Warna merah Bootstrap */
+    font-weight: 300;
+    padding-top: 6px; /* Ruang atas */
+}
+
+.error-text-list {
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.error-text-list li {
+    font-size: 0.8rem; /* Sekitar 14px */
+    color: #dc3545; /* Warna merah Bootstrap */
+    font-weight: 500; /* Medium */
+    list-style: none; /* Menghilangkan bullet default */
+    padding-left: 1rem;
+    position: relative;
+}
+
+.error-text-list li::before {
+    content: "⚠ "; /* Icon peringatan */
+    position: absolute;
+    left: 0;
+}
+
+
 .paddind_bottom_0 {
      padding-bottom: 0 !important;
 }
@@ -727,6 +755,14 @@ button {
       .slider-text .btn-primary:hover, .slider-text .btn-primary:focus {
         background: #fff !important;
         color: #000000; }
+
+.owl-carousel .owl-stage-outer {
+    touch-action: pan-y !important;; /* Izinkan scroll vertikal */
+}
+
+.owl-carousel .owl-item {
+    touch-action: pan-y !important;; /* Izinkan scroll vertikal di setiap item */
+}
 
 
 

@@ -9,8 +9,8 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a href="{{ route('front.index')  }}" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="{{ route('category.index') }}" class="nav-link">Category</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="{{ route('front.about') }}" class="nav-link">About</a></li>
+                <li class="nav-item mr-2"><a href="#" class="nav-link">Contact</a></li>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <li class="nav-item mr-2 cta"><a href="{{ route('contrib.place.add') }}" class="nav-link"><span><i class="fa-solid fa-plus mr-2"></i>Add Place</span></a></li>
                     <li class="nav-item cta"><a href="{{ route('profile.index') }}" class="nav-link"><span><i class="fa-solid fa-user mr-1"></i> Profile</span></a></li>

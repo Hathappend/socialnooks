@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center gap-2 mb-2 operational-time-section" >
             <!-- Pilih Hari -->
             <select class="form-select" wire:model.live="operationalHours.{{ $index }}.day">
-                <option value="{{ null }}">Pilih Hari</option>
+                <option value="{{ null }}">Choose Day</option>
                 <option value="Senin">Senin</option>
                 <option value="Selasa">Selasa</option>
                 <option value="Rabu">Rabu</option>
@@ -22,15 +22,15 @@
             <!-- Tombol Hapus -->
             <button type="button" class="btn" wire:click="removeOperationalHour({{ $index }})">❌</button>
         </div>
-    <ul>
+    <ul class="error-text-list">
         @error("operationalHours.$index.day")
-        <li><span class="text-danger">{{ $message }}</span></li>
+        <li><span class="error-text">{{ $message }}</span></li>
         @enderror
         @error("operationalHours.$index.start")
-        <li><span class="text-danger">{{ $message }}</span></li>
+        <li><span class="error-text">{{ $message }}</span></li>
         @enderror
         @error("operationalHours.$index.end")
-        <li><span class="text-danger">{{ $message }}</span></li>
+        <li><span class="error-text">{{ $message }}</span></li>
         @enderror
     </ul>
 

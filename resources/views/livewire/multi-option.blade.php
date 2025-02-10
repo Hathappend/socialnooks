@@ -18,9 +18,15 @@
                 </div>
                 <div class="desc">
                     <h5 id="sidebar-title">Detail Information</h5>
-                    <p class="description" id="sidebar-description">Please set your location that you want to show to people looking for property</p>
+                    <p class="description" id="sidebar-description">Provide accurate location details to help property seekers find your place.</p>
                 </div>
-                <p class="help">Call 0043-57385 for help</p>
+                <div>
+                    <p class="help">Contact us for any question</p>
+                    <a href="{{ route('front.index') }}" class="btn mt-3 mb-3">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </div>
+
             </div>
             <div class="col-md-8 content active" id="step1">
                 <h4>Detail Information</h4>
@@ -28,29 +34,29 @@
                     <div class="col-md-12 mt-3">
                         <input type="text" x-model="place_name"  wire:model.live.debounce.300ms="place_name" class="form-control" placeholder="Place name">
                         @error("place_name")
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="error-text">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="col-md-6 mt-3">
                         <input type="text" x-model="start_price"  wire:model.live.debounce.300ms="start_price" class="form-control" placeholder="Start Price">
                         @error("start_price")
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="error-text">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="col-md-6 mt-3">
                         <input type="text" x-model="end_price"  wire:model.live.debounce.300ms="end_price" class="form-control" placeholder="End Price">
                         @error("end_price")
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="error-text">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
                 <textarea class="form-control mt-3" x-model="desc"  wire:model.live.debounce.300ms="desc" rows="3" placeholder="Description"></textarea>
                 @error("desc")
-                    <span class="text-danger">{{ $message }}</span>
+                    <span class="error-text">{{ $message }}</span>
                 @enderror
                 <input type="text" x-model="phone_number"  wire:model.live.debounce.300ms="phone_number" class="form-control mt-3" placeholder="Phone Number">
                 @error("phone_number")
-                    <span class="text-danger ">{{ $message }}</span>
+                    <span class="error-text ">{{ $message }}</span>
                 @enderror
 
                 @livewire('operational-hours')
@@ -115,11 +121,11 @@
                     @endforelse
                 </select>
 
-                @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+                @error('category') <span class="error-text">{{ $message }}</span> @enderror
 
                 <input type="file" wire:model="file_upload" name="photos[]" class="form-control mt-3" multiple>
-                @error('file_upload') <span class="text-danger">{{ $message }}</span> @enderror
-                @error('file_upload.*') <span class="text-danger">{{ $message }}</span> @enderror
+                @error('file_upload') <span class="error-text">{{ $message }}</span> @enderror
+                @error('file_upload.*') <span class="error-text">{{ $message }}</span> @enderror
 
                 <div class="img-preview-container mt-3">
                     @foreach($previewUrls as $url)

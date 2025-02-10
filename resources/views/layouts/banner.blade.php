@@ -7,6 +7,8 @@
         $text = 'Categories';
     }elseif (\Illuminate\Support\Facades\Route::is('search')){
         $text = 'Search Result';
+    }elseif (\Illuminate\Support\Facades\Route::is('front.about')){
+        $text = 'About';
     }
 @endphp
 <div class="hero-wrap js-fullheight" style="background-image: url({{ asset($path) }});">

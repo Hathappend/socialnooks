@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('places', function (Blueprint $table) {
             $table->id();
             $table->string('place_unique_code', 27)->unique();
-            $table->string('name', 100);
+            $table->string('name', 100)->index();
             $table->string('slug')->nullable();
             $table->longText('description')->nullable();
             $table->longText('address')->nullable();

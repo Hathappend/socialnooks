@@ -257,7 +257,7 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row new-come-slider owl-carousel ftco-animate">
+            <div class="row new-come-slider owl-carousel ftco-animate" style="touch-action: pan-y;">
                 @forelse($newComers as $new)
                     <div class="item col-md-12 ftco-animate">
                         <div class="destination">
@@ -434,5 +434,7 @@
             }
         });
     </script>
+
+
 
 @endsection

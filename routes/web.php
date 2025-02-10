@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(EnsureIsAuthenticated::class)->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('front.index');
+    Route::get('/about', [FrontController::class, 'about'])->name('front.about');
 
     Route::get('/search', [ApiController::class, 'searchPlaces'])->name('search');
     Route::get('/place-detail/id/{placeId}', [ApiController::class, 'placeDetails'])->name('api.place.details');
