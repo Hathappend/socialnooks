@@ -15,12 +15,12 @@
 
                         @forelse($photos as $photo)
                             <div class="swiper-slide">
-                                <img src="{{ asset("storage/places/$photo->photo") }}" class=""  alt="">
-                                <div class="offer_name"><a href="single_listing.html">{{ $details['name'] }}</a></div>
+                                <img src="{{ asset("storage/$photo->photo") }}" class=""  alt="">
+                                <div class="offer_name"><a href="#">{{ $details['name'] }}</a></div>
                             </div>
                         @empty
                             <div class="swiper-slide">
-                                <img src="https://semantic-ui.com/images/wireframe/image.png" class=""  alt="">
+                                <img src="{{ asset('storage/places/no_image.jpg') }}" class=""  alt="">
                             </div>
                         @endforelse
 
@@ -93,7 +93,7 @@
 
                                             @forelse($facilities as $facility)
                                                 <div class="facility-item">
-                                                    <i class="fas fa-wifi"></i>
+                                                    <img src="{{ asset("storage/{$facility->icon}") }}" alt="">
                                                     <span>{{$facility->name}}</span>
                                                 </div>
                                             @empty
@@ -145,7 +145,7 @@
                                             @forelse($payments as $payment)
 
                                                 <div class="facility-item">
-                                                    <i class="fas fa-money-bill-wave"></i>
+                                                    <img src="{{ asset("storage/{$payment->icon}") }}" alt="">
                                                     <span>{{$payment->name}}</span>
                                                 </div>
 
@@ -154,26 +154,7 @@
                                                     <p>Haven't yet facility for now</p>
                                                 </div>
                                             @endforelse
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fab fa-cc-visa"></i>--}}
-{{--                                                <span>Kartu Kredit</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fab fa-cc-mastercard"></i>--}}
-{{--                                                <span>Debit Card</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-qrcode"></i>--}}
-{{--                                                <span>QRIS</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-wallet"></i>--}}
-{{--                                                <span>E-Wallet</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-university"></i>--}}
-{{--                                                <span>Bank Transfer</span>--}}
-{{--                                            </div>--}}
+
                                         </div>
                                     </div>
 
@@ -188,7 +169,7 @@
                                             @forelse($services as $service)
 
                                                 <div class="facility-item">
-                                                    <i class="fas fa-store"></i>
+                                                    <img src="{{ asset("storage/{$service->icon}") }}" alt="">
                                                     <span>{{$service->name}}</span>
                                                 </div>
 
@@ -197,26 +178,7 @@
                                                     <p>Haven't yet services for now</p>
                                                 </div>
                                             @endforelse
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-shopping-bag"></i>--}}
-{{--                                                <span>Take Away</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-motorcycle"></i>--}}
-{{--                                                <span>Delivery</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-calendar-check"></i>--}}
-{{--                                                <span>Reservasi</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-users"></i>--}}
-{{--                                                <span>Private Event</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-headset"></i>--}}
-{{--                                                <span>24/7 Support</span>--}}
-{{--                                            </div>--}}
+
                                         </div>
                                     </div>
 
@@ -231,7 +193,7 @@
                                             @forelse($accessibilities as $accessibility)
 
                                                 <div class="facility-item">
-                                                    <i class="fas fa-wheelchair"></i>
+                                                    <img src="{{ asset("storage/{$accessibility->icon}") }}" alt="">
                                                     <span>{{ $accessibility->name }}</span>
                                                 </div>
 
@@ -240,26 +202,7 @@
                                                     <p>Haven't yet accessibility for now</p>
                                                 </div>
                                             @endforelse
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-elevator"></i>--}}
-{{--                                                <span>Lift</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-restroom"></i>--}}
-{{--                                                <span>Toilet Disabilitas</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-parking"></i>--}}
-{{--                                                <span>Parkir Disabilitas</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-sign-language"></i>--}}
-{{--                                                <span>Staff Bahasa Isyarat</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="facility-item">--}}
-{{--                                                <i class="fas fa-braille"></i>--}}
-{{--                                                <span>Braille Menu</span>--}}
-{{--                                            </div>--}}
+
                                         </div>
                                     </div>
                                 </div>
@@ -331,10 +274,8 @@
                     title: "{{ $details['displayName']['text'] ?? $details['name'] }}"
                 });
 
-                // Memastikan marker bisa diklik
                 marker.clickable = true;
 
-                // Gunakan google.maps.event.addListener untuk event klik
                 google.maps.event.addListener(marker, "click", () => {
                     alert("Marker clicked!");
                 });
@@ -439,7 +380,6 @@
 
                 input.files = dataTransfer.files;
 
-                // Trigger event agar daftar file diperbarui
                 const event = new Event('change');
                 input.dispatchEvent(event);
             }

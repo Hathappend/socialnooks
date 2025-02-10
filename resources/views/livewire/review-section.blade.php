@@ -100,7 +100,7 @@
             @forelse($details['reviews'] ?? [] as $reviewIndex => $review)
                 @if($loop->first)
                     <h3>Rating and Review</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dolor ea ipsum labore porro provident quis, repudiandae vel veritatis? Adipisci est eveniet perspiciatis praesentium reiciendis sapiente! Deleniti facilis perspiciatis temporibus!</p>
+                    <p>Achieving excellence requires effort and dedication. Providing honest feedback helps improve services and products. Every review contributes to a better experience for everyone. Transparency and clarity are key to building trust!</p>
                 @endif
 
                 <div class="review-item">

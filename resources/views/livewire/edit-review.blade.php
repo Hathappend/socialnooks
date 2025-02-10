@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="modal-section modal-product">
                     @if(isset($placeDetail['thumbnail']))
-                        <img src="{{ asset("storage/places/". $placeDetail['thumbnail'] ) }}" alt="Product" class="img-fluid">
+                        <img src="{{ asset("storage/". $placeDetail['thumbnail'] ) }}" alt="Product" class="img-fluid">
                     @else
                         <img src="{{ $placeDetail['photoUrls'][0] ?? asset("storage/places/no_image.jpg" ) }}" alt="Product" class="img-fluid">
                     @endif

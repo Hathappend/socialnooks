@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="modal-section modal-product">
                     @if(isset($placeDetail['thumbnail']))
-                        <img src="{{ asset("storage/places/". $placeDetail['thumbnail'] ) }}" alt="Product" class="img-fluid">
+                        <img src="{{ asset("storage/". $placeDetail['thumbnail'] ) }}" alt="Product" class="img-fluid">
                     @else
                         <img src="{{ $placeDetail['photoUrls'][0] ?? asset("storage/places/no_image.jpg" ) }}" alt="Product" class="img-fluid">
                     @endif
@@ -34,7 +34,7 @@
                     @error('rating') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="modal-section upload-container" data-upload-container>
-                    <label for="uploadPhoto" class="form-label">Add Photo or Video</label>
+                    <label for="uploadPhoto" class="form-label">Add Photo</label>
                     <div id="uploadPhoto" class="upload-section uploadPhoto">
                         <span id="uploadText">Click here to upload (.jpg .png .jpeg)</span>
                         <input type="file" wire:model.defer="photos" class="fileInput" id="fileInput" multiple style="display: none;">
@@ -49,7 +49,7 @@
                 </div>
                 @error('reviewText') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
-            <div class="modal-footer" style="border: 1px solid bla;">
+            <div class="modal-footer">
                 <button wire:click="submitReview" wire:loading.attr="disabled" class="btn btn-primary w-100">
                     <span wire:loading.remove>Submit Review</span>
                     <span wire:loading>Submitting...</span>

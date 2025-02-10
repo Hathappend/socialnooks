@@ -30,7 +30,6 @@ class EditReview extends Component
             'reviewText' => 'required|string|max:400',
             'photos' => 'nullable|array',
             'photos.*' => function ($attribute, $value, $fail) {
-                // Cek apakah isi $value adalah string nama file dari database atau file upload baru
                 if (!is_string($value) && !($value instanceof \Illuminate\Http\UploadedFile)) {
                     $fail('The uploaded file must be an image.');
                 }

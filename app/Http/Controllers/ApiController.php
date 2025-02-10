@@ -55,7 +55,7 @@ class ApiController extends Controller
 
     public function placeDetails(String $placeId): View
     {
-        session(['url.intended' => url()->current()]);
+
 
         $existsInDatabase = $this->placeService->getPlaceFromCode($placeId);
 

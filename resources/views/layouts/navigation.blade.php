@@ -13,7 +13,7 @@
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <li class="nav-item mr-2 cta"><a href="{{ route('contrib.place.add') }}" class="nav-link"><span><i class="fa-solid fa-plus mr-2"></i>Add Place</span></a></li>
-                    <li class="nav-item cta"><a href="contact.html" class="nav-link"><span><i class="fa-solid fa-user mr-1"></i> Profile</span></a></li>
+                    <li class="nav-item cta"><a href="{{ route('profile.index') }}" class="nav-link"><span><i class="fa-solid fa-user mr-1"></i> Profile</span></a></li>
                 @else
                     <li class="nav-item  mr-2 cta"><a href="{{ route('login') }}" class="nav-link bg-primary"><span><i class="fa-solid fa-user mr-2"></i>Login</span></a></li>
                 @endif

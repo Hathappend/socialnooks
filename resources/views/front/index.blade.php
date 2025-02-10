@@ -262,7 +262,7 @@
                     <div class="item col-md-12 ftco-animate">
                         <div class="destination">
                             <a href="{{ route('api.place.details', $new->place_unique_code) }}" class="img img-2 d-flex justify-content-center align-items-center"
-                               style="background-image: url({{ asset("storage/places/{$new->thumbnail}") }});">
+                               style="background-image: url({{ asset("storage/{$new->thumbnail}") }});">
                                 <div class="icon d-flex justify-content-center align-items-center">
                                     <span class="icon-search2"></span>
                                 </div>
@@ -275,12 +275,9 @@
                                             <span>{{ \App\Helpers\FormatedHelper::starsFormating(isset($new->reviews->rating) ? $new->reviews->rating : null) }}</span>
                                         </div>
                                     </div>
-{{--                                    <div class="two">--}}
-{{--                                        <span class="price">$200</span>--}}
-{{--                                    </div>--}}
                                 </div>
                                 <p>{{ $new->address }}</p>
-                                <p class="days"><span>{{ \Illuminate\Support\Str::headline($new->category->name) }}</span></p>
+                                <p class="days"><span class="badge badge-warning">{{ \Illuminate\Support\Str::headline($new->category->name) }}</span></p>
                                 <hr>
                                 <p class="bottom-area d-flex">
                                     <span><i class="icon-map-o"></i> </span>

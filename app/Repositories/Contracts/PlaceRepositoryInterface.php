@@ -12,4 +12,6 @@ interface PlaceRepositoryInterface
     public function findCode(string $placeCode): ?Place;
 
     public function findAll(): Collection;
+
+    public function findStatusPlaceByUserId(int $userId, string $status): ?Collection;
 }

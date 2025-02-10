@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Review;
 use App\Models\ReviewPhoto;
 use App\Repositories\Contracts\ReviewRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class ReviewRepository implements ReviewRepositoryInterface
 {
@@ -25,6 +26,11 @@ class ReviewRepository implements ReviewRepositoryInterface
     public function findReviewById(int $id): ?Review
     {
         return Review::with('photos')->find($id);
+    }
+
+    public function findReviewByUserId(int $userId): ?Collection
+    {
+        return Review::where('user_id', $userId)->with(['photos', 'place', 'user'])->get();
     }
 
     public function deleteById(int $id): bool

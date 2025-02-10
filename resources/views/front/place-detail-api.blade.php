@@ -20,7 +20,7 @@
 {{--                            </div>--}}
                         @empty
                             <div class="swiper-slide">
-                                <img src="https://semantic-ui.com/images/wireframe/image.png" class=""  alt="">
+                                <img src="{{ asset('storage/places/no_image.jpg') }}" class=""  alt="">
                             </div>
                         @endforelse
 

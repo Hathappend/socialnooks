@@ -15,7 +15,7 @@
 
         <title>@yield('page_title')</title>
 
-        @if(! \Illuminate\Support\Facades\Route::is('contrib.place.add'))
+        @if(! \Illuminate\Support\Facades\Route::is('contrib.place.add') || ! \Illuminate\Support\Facades\Route::is('profile.index'))
             <!-- bootstrap css -->
             <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         @endif
@@ -56,7 +56,7 @@
         use Illuminate\Support\Facades\Route;
     @endphp
 
-    @if(Route::is('contrib.place.add'))
+    @if(Route::is('contrib.place.add') || Route::is('profile.index'))
 
     @elseif(! Route::is('front.index', 'api.place.details'))
         @include('layouts.navigation')
@@ -72,7 +72,10 @@
 
         @include('layouts.bottom_nav')
 
+        @if(! Route::is('profile.index'))
+
         @include('layouts.footer')
+        @endif
 
     @livewireScripts
         <script src="{{ asset('js/jquery.min.js') }}"></script>

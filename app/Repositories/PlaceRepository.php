@@ -29,5 +29,13 @@ class PlaceRepository implements PlaceRepositoryInterface
             ->get();
     }
 
+    public function findStatusPlaceByUserId(int $userId, string $status): ?Collection
+    {
+        return Place::where('user_id', $userId)
+            ->where('status', $status)
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
 
 }

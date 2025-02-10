@@ -17,8 +17,16 @@ Route::middleware(EnsureIsAuthenticated::class)->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/{category:slug}', [CategoryController::class, 'detail'])->name('category.details');
 
-    Route::get('/contrib/add-place', [PlaceController::class, 'addPlaceView'])->name('contrib.place.add');
-    Route::post('/contrib/add-place', [PlaceController::class, 'createPlace'])->name('contrib.place.create');
+    Route::middleware('auth')->group(function () {
+        Route::get('/contrib/add-place', [PlaceController::class, 'addPlaceView'])->name('contrib.place.add');
+        Route::post('/contrib/add-place', [PlaceController::class, 'createPlace'])->name('contrib.place.create');
+
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+
 
 });
 
@@ -27,10 +35,6 @@ Route::middleware(EnsureIsAuthenticated::class)->group(function () {
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
 
 require __DIR__.'/auth.php';

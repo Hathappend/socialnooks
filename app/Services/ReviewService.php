@@ -6,6 +6,7 @@ use App\Models\Place;
 use App\Models\Review;
 use App\Repositories\PlaceRepository;
 use App\Repositories\ReviewRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewService
@@ -102,6 +103,11 @@ class ReviewService
         }
 
         return false;
+    }
+
+    public function getReviewByUserId(int $userId): Collection
+    {
+        return $this->reviewRepository->findReviewByUserId($userId);
     }
 
     public function deletePhoto(int $reviewId, string $photo): bool

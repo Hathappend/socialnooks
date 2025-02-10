@@ -73,5 +73,20 @@ class PlaceService
         return $this->placeRepository->findCode($placeCode);
     }
 
+    public function getPendingPlaceByUserId(int $userId, string $status): ?Collection
+    {
+        return $this->placeRepository->findStatusPlaceByUserId($userId, $status);
+    }
+
+    public function getApprovedPlaceByUserId(int $userId, string $status): ?Collection
+    {
+        return $this->placeRepository->findStatusPlaceByUserId($userId, $status);
+    }
+
+    public function getRejectedPlaceByUserId(int $userId, string $status): ?Collection
+    {
+        return $this->placeRepository->findStatusPlaceByUserId($userId, $status);
+    }
+
 
 }
