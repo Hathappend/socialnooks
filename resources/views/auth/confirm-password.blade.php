@@ -1,27 +1,29 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+</head>
+<body>
+
+
+<div class="form-container">
+    <div class="title_container">
+        <p class="title">Confirm Password</p>
+        <span class="subtitle">This is a secure area of the application. Please confirm your password before continuing.</span>
     </div>
 
-    <form method="POST" action="{{ route('password.confirm') }}">
+    <form class="form" method="POST" action="{{ route('password.confirm') }}">
         @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
+        <input type="password" name="password" autocomplete="current-password" class="input" placeholder="Password">
+        @error("password")
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <button class="form-btn">Confirm</button>
     </form>
-</x-guest-layout>
+</div>
+
+</body>
+</html>

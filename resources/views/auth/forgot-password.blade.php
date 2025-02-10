@@ -1,25 +1,37 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+</head>
+<body>
+
+
+<div class="form-container">
+    <div class="title_container">
+        <p class="title">Forgot Password</p>
+        <span class="subtitle">Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</span>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
+    <form class="form" method="POST" action="{{ route('password.email') }}">
         @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
+        <input type="email" name="email" value="{{old('email')}}" class="input" placeholder="Email" autofocus autocomplete="username">
+        @error("email")
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <button class="form-btn">Email Password Reset Link</button>
     </form>
-</x-guest-layout>
+    <p class="sign-up-label">
+        Remember your password?
+        <a href="{{ route('login') }}">
+            <span class="sign-up-link">Login</span>
+        </a>
+
+    </p>
+</div>
+
+</body>
+</html>
+
