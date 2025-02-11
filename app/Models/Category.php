@@ -13,7 +13,7 @@ class Category extends Model
 
     protected $table = 'categories';
     public $timestamps = false;
-    protected $fillable = ['name', 'slug', 'thumbnail'];
+    protected $fillable = ['name', 'slug', 'thumbnail', 'icon'];
 
     public function setNameAttribute($value): void
     {

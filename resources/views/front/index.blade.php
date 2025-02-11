@@ -59,41 +59,17 @@
                     </div>
                 </form>
                 <div class="icons_main">
-                    <div class="box_1">
-                        <div class="icon_1">
-                            <h6 class="food_text">FOOD</h6>
-                        </div>
-                    </div>
-                    <div class="box_1">
-                        <div class="icon_2">
-                            <h6 class="food_text">Medical</h6>
-                        </div>
-                    </div>
-                    <div class="box_1">
-                        <div class="icon_3">
-                            <h6 class="food_text">Services</h6>
-                        </div>
-                    </div>
-                    <div class="box_1">
-                        <div class="icon_4">
-                            <h6 class="food_text">Jobs</h6>
-                        </div>
-                    </div>
-                    <div class="box_1">
-                        <div class="icon_5">
-                            <h6 class="food_text">Shopping</h6>
-                        </div>
-                    </div>
-                    <div class="box_1">
-                        <div class="icon_6">
-                            <h6 class="food_text">Hotels</h6>
-                        </div>
-                    </div>
-                    <div class="box_1">
-                        <div class="icon_7">
-                            <h6 class="food_text">automotive</h6>
-                        </div>
-                    </div>
+                    @forelse($highlightCategories as $category)
+                        <a href="{{ route('category.details', $category->slug) }}">
+                            <div class="box_1">
+                                <div class="icon_1" style="background-image: url({{ asset('storage/'.$category->icon) }});">
+                                    <h6 class="food_text">{{ \Illuminate\Support\Str::headline($category->name) }}</h6>
+                                </div>
+                            </div>
+                        </a>
+                    @empty
+                        <small>No highlighted categories yet </small>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -111,9 +87,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-
+                    @if($sliderEnabled)
                         @livewire('featured-places')
-
+                    @endif
                 </div>
             </div>
         </div>
@@ -298,7 +274,7 @@
             <div class="row justify-content-center mb-5 pb-3">
                 <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
                     <h2 class="mb-4">Some fun facts</h2>
-                    <span class="subheading">More than 100,000 websites hosted</span>
+                    <span class="subheading">More than 100,000 places ready for you to explore</span>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -354,7 +330,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @livewire('you-shoul-visit')
+                    @if($sliderEnabled)
+                        @livewire('you-shoul-visit')
+                    @endif
                 </div>
             </div>
         </div>
@@ -375,7 +353,9 @@
                 <div class="col-lg-12">
                     <!-- Offers Grid -->
 
-                    @livewire('maybe-you-like')
+                    @if($sliderEnabled)
+                        @livewire('maybe-you-like')
+                    @endif
                 </div>
 
 

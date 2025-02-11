@@ -862,6 +862,8 @@ button {
               color: #fff; }
 
 
+
+
   .ftco-section-parallax {
     position: relative; }
     .ftco-section-parallax .parallax-img {
@@ -2101,7 +2103,6 @@ select.form-control:not([size]):not([multiple]) {
 .icon_1 {
     width: 100%;
     float: left;
-    background-image: url(../images/icon-1.png);
     height: auto;
     background-repeat: no-repeat;
     text-align: center !important;

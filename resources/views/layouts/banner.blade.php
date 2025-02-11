@@ -9,6 +9,8 @@
         $text = 'Search Result';
     }elseif (\Illuminate\Support\Facades\Route::is('front.about')){
         $text = 'About';
+    }elseif (\Illuminate\Support\Facades\Route::is('category.details')){
+        $text = 'Result By Category';
     }
 @endphp
 <div class="hero-wrap js-fullheight" style="background-image: url({{ asset($path) }});">

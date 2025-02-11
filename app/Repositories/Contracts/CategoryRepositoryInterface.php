@@ -10,4 +10,6 @@ interface CategoryRepositoryInterface
     public function getAll(): Collection;
 
     public function findById(int $id): ?Category;
+
+    public function findCategoriesByHighlight(bool $highlight=true): Collection;
 }

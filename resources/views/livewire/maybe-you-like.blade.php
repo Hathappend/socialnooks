@@ -1,4 +1,5 @@
-<div wire:ignore class="offers_grid ftco-animate">
+<div
+class="offers_grid ftco-animate">
 
     <!-- Offers Item -->
     @foreach($places as $place)
@@ -28,6 +29,16 @@
                                 </li>
                             </ul>
                         </div>
+                        <p class="days pt-3">
+                            @if(isset($place['types']))
+                                @forelse(array_slice($place['types'], 0, 5) as $type)
+                                    <span class="badge text-white bg-success" >
+                                    <small>{{ \Illuminate\Support\Str::headline($type) }}</small>
+                                </span>
+                                @empty
+                                @endforelse
+                            @endif
+                        </p>
                         <div class="button book_button"><a
                                 href="{{ route('api.place.details', $place['id']) }}">book<span></span><span></span><span></span></a>
                         </div>

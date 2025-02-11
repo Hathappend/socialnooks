@@ -88,17 +88,6 @@ body {
 }
 
 /* Edit Button Styles */
-.edit-button {
-    color: #3B82F6;
-    border: none;
-    background: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    padding: 0;
-}
 
 
 .edit-button:hover {
@@ -186,7 +175,7 @@ body {
     font-size: 0.875rem;
     font-weight: 500;
     padding: 0;
-    z-index: 2;
+    z-index: 10;
 }
 
 .title-and-btn .edit-btn{

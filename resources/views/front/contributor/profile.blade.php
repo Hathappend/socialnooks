@@ -221,15 +221,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
             document.querySelectorAll('.edit-button').forEach(button => {
                 button.addEventListener('click', function(e) {
-                    e.preventDefault();
                     const section = this.closest('.section-card');
-                    if (section.querySelector('.profile-header')) {
-                        new bootstrap.Modal(document.getElementById('editProfileModal')).show();
-                    } else if (section.querySelector('.info-grid')) {
-                        new bootstrap.Modal(document.getElementById('editPersonalInfoModal')).show();
+
+                    if (section && (section.querySelector('.profile-header') || section.querySelector('.info-grid'))) {
+                        e.preventDefault();
+
+                        if (section.querySelector('.profile-header')) {
+                            new bootstrap.Modal(document.getElementById('editProfileModal')).show();
+                        } else if (section.querySelector('.info-grid')) {
+                            new bootstrap.Modal(document.getElementById('editPersonalInfoModal')).show();
+                        }
                     }
                 });
             });
@@ -241,6 +244,7 @@
                 });
             });
         });
+
     </script>
 
     <script>

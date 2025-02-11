@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Models\Setting;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\PlaceRepositoryInterface;
 
@@ -21,9 +22,11 @@ class FrontService
     {
         $categories = $this->categoryRepository->getAll();
         $newComers = $this->placeRepository->findAll();
+        $highlightCategories = $this->categoryRepository->findCategoriesByHighlight();
+        $sliderEnabled = boolval(Setting::where('name', 'Slider Carousel')->value('condition') ?? false);
 
 
-        return compact('categories', 'newComers');
+        return compact('categories', 'newComers', 'highlightCategories', 'sliderEnabled');
     }
 
 }

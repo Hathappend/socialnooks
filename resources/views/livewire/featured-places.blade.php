@@ -1,4 +1,30 @@
-<div wire:ignore class="destination-slider owl-carousel ftco-animate">
+<div class="destination-slider owl-carousel ftco-animate" wire:ignore x-data="{
+        initCarousel() {
+            $('.destination-slider').trigger('destroy.owl.carousel');
+            $('.destination-slider').owlCarousel({
+                autoplay: true,
+			loop: true,
+			items:1,
+			margin: 30,
+			stagePadding: 50,
+			nav: false,
+			dots: false,
+
+			responsive:{
+				0:{
+					items: 1
+				},
+				600:{
+					items: 1
+				},
+				1000:{
+					items: 2
+				}
+            });
+        }
+    }"
+     x-init="initCarousel()">
+
     @foreach($places as $place)
         <div class="item">
             <div class="destination">
@@ -19,7 +45,16 @@
 
                     </div>
                     <p>{{ $place['shortFormattedAddress'] }}</p>
-                    <p class="days"><span>2 days 3 nights</span></p>
+                    <p class="days">
+                        @if(isset($place['types']))
+                            @forelse(array_slice($place['types'], 0, 5) as $type)
+                                <span class="badge text-white bg-success" >
+                                    <small>{{ \Illuminate\Support\Str::headline($type) }}</small>
+                                </span>
+                            @empty
+                            @endforelse
+                        @endif
+                    </p>
                     <hr>
                     <p class="bottom-area d-flex">
                         <span><i class="icon-map-o"></i> </span>

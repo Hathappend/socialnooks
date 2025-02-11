@@ -8,5 +8,5 @@ interface ApiRepositoryInterface
 
     public function getPlaceDetail(String $placeId);
     public function autocomplete($query, $latitude, $longitude, $radius = 5000);
-    public function getHomeDataPlace($category, $latitude, $longitude, $radius);
+    public function getHomeDataPlace($categories, $latitude, $longitude, $radius);
 }

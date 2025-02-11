@@ -159,9 +159,9 @@ class ApiRepository implements ApiRepositoryInterface
     {
         $fieldMask = '';
         if ($useFor == 'nearby') {
-            $fieldMask = 'places.id,places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.photos,places.priceRange';
+            $fieldMask = 'places.id,places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.photos,places.priceRange,places.types';
         }else{
-            $fieldMask = 'places.id,places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.photos,places.priceRange,nextPageToken';
+            $fieldMask = 'places.id,places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.photos,places.priceRange,places.types,nextPageToken';
         }
 
         $response = Http::withHeaders([
@@ -289,7 +289,7 @@ class ApiRepository implements ApiRepositoryInterface
     /**
      * @throws Exception
      */
-    public function getHomeDataPlace($category, $latitude, $longitude, $radius)
+    public function getHomeDataPlace($categories, $latitude, $longitude, $radius)
     {
         $urlNearby = "https://places.googleapis.com/v1/places:searchNearby";
 
@@ -297,7 +297,7 @@ class ApiRepository implements ApiRepositoryInterface
 
             $params = [
                 'maxResultCount' => 5,
-                "includedTypes"=> ['restaurant'],
+                "includedTypes"=> $categories,
                 'locationRestriction' => [
                     'circle' => [
                         'center' => [
@@ -312,7 +312,7 @@ class ApiRepository implements ApiRepositoryInterface
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'X-Goog-Api-Key' => $this->apiKey,
-                'X-Goog-FieldMask' => 'places.id,places.displayName,places.formattedAddress,places.shortFormattedAddress,places.adrFormatAddress,places.rating,places.photos',
+                'X-Goog-FieldMask' => 'places.id,places.displayName,places.formattedAddress,places.shortFormattedAddress,places.adrFormatAddress,places.rating,places.photos,places.priceRange,places.types,places.userRatingCount',
             ])->post($urlNearby, $params);
 
             if ($response->failed()) {

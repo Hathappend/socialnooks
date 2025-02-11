@@ -27,6 +27,16 @@
                                     <li class="offers_icons_item"><img src="{{ asset('images/sailboat.png') }}" alt=""></li>
                                 </ul>
                             </div>
+                            <p class="days pt-3">
+                                @if(isset($place['types']))
+                                    @forelse($place['types'] as $type)
+                                        <span class="badge text-white bg-success" >
+                                    <small>{{ \Illuminate\Support\Str::headline($type) }}</small>
+                                </span>
+                                    @empty
+                                    @endforelse
+                                @endif
+                            </p>
                             <div class="button book_button"><a href="{{ route('api.place.details', $place['id']) }}">See Now<span></span><span></span><span></span></a></div>
                             <div class="offer_reviews">
                                 <div class="offer_reviews_content">

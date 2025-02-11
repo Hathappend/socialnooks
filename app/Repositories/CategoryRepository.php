@@ -18,4 +18,10 @@ class CategoryRepository implements CategoryRepositoryInterface
         return Category::query()->find($id);
     }
 
+    public function findCategoriesByHighlight(bool $highlight = true): Collection
+    {
+        return Category::where('highlight', $highlight)->get();
+    }
+
+
 }

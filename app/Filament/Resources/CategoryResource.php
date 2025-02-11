@@ -12,6 +12,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -37,7 +39,13 @@ class CategoryResource extends Resource
                 ->image()
                 ->required()
                 ->disk('public')
-                ->directory('categories')
+                ->directory('categories'),
+
+                FileUpload::make('icon')
+                    ->image()
+                    ->required()
+                    ->disk('public')
+                    ->directory('icon')
             ]);
     }
 
@@ -49,10 +57,25 @@ class CategoryResource extends Resource
                     ->searchable()
                     ->formatStateUsing(fn ($state): string => Str::headline($state)),
 
-                ImageColumn::make('thumbnail')
+                ImageColumn::make('thumbnail'),
+                ImageColumn::make('icon')
+                    ->size(20)
+                    ->circular(),
+                ToggleColumn::make('highlight')
+                    ->label('Highlight')
+                    ->onColor('success')
+                    ->offColor('gray')
+                    ->afterStateUpdated(fn ($record, $state) => $record->update(['highlight' => $state])),
             ])
             ->filters([
-                //
+                TernaryFilter::make('highlight')
+                    ->label('Filter Highlight')
+                    ->trueLabel('With Highlight')
+                    ->falseLabel('Not Filter Highlight')
+                    ->queries(
+                        true: fn ($query) => $query->where('highlight', true),
+                        false: fn ($query) => $query->where('highlight', false),
+                    ),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
