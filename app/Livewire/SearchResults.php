@@ -48,7 +48,8 @@ class SearchResults extends Component
         $query = \App\Models\Place::query()
             ->with(['category', 'reviews'])
             ->withCount('reviews as userRatingCount')
-            ->withAvg('reviews as rating', 'rating');
+            ->withAvg('reviews as rating', 'rating')
+            ->where('status', 'approved');;
 
         // Filter pencarian teks
         if (!empty($searchParams['query'])) {
@@ -128,7 +129,7 @@ class SearchResults extends Component
         );
 
         $savedApiFormatted = [];
-        foreach ($response['places'] as $place) {
+        foreach ($response['places'] ?? [] as $place) {
             $formattedApiPlaces = \App\Helpers\FormatedHelper::priceRangeFormating($place);
             $formattedApiPlaces = \App\Helpers\FormatedHelper::ratingFormating($formattedApiPlaces);
             $savedApiFormatted[] = $formattedApiPlaces;

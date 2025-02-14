@@ -30,7 +30,7 @@ class PlaceService
             'end_price' => $data['end_price'] ?? null,
             'phone_number' => $data['phone_number'] ?? null,
             'category_id' => $data['category'] ?? null,
-            $params === "API" ? null : 'user_id' => isset($data['name']) ? Auth::user()->id : null,
+            $params === "API" ? null : 'user_id' => isset($data['name']) ? (Auth::user()->id ?? null) : null,
             $params !== "API" ? null : 'status' => "approved",
         ];
 

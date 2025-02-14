@@ -50,7 +50,7 @@ class ApiServices
 
     public function getHomeDataPlace($latitude, $longitude,$radius, $useFor )
     {
-        $categories = $this->categoryRepository->getAll()->pluck('name')->toArray();
+        $categories = $this->categoryRepository->findCategoriesByHighlight()->pluck('name')->toArray();
         $cacheKey = "places_{$useFor}_{$latitude}_$longitude";
 
         return Cache::remember($cacheKey, now()->addDays(7), function () use ($categories, $latitude, $longitude,$radius) {

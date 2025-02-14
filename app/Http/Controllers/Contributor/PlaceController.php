@@ -46,9 +46,9 @@ class PlaceController extends Controller
         foreach ($data['photos'] as $photo) {
 
             $fileName = $place_unique_code . '_' . Str::ulid() . '.' . $photo->extension();
-            $photo->storeAs('places', 'places/'.$fileName, 'public');
+            $path = $photo->storeAs('places', $fileName, 'public');
 
-            $storedPhotos[] = ['photo' => $fileName];
+            $storedPhotos[] = ['photo' => $path];
         }
 
         $data['photos'] = $storedPhotos;
@@ -56,7 +56,7 @@ class PlaceController extends Controller
         $result = $this->placeService->create($data);
 
         if ($result) {
-            return redirect()->route('api.place.details', $place_unique_code)->with('success', "Added a new place");
+            return redirect()->route('profile.index')->with('success', "Added a new place. Please check the 'Place' section in the navigation. ");
         }
         return redirect()->back()->with('error', "Something went wrong");
 

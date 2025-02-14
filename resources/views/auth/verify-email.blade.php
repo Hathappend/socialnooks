@@ -20,7 +20,7 @@
     @endif
 
     <form class="form" method="POST" action="{{ route('verification.send') }}">
-
+        @csrf
         <button class="form-btn">Resend Verification Email</button>
     </form>
 

@@ -14,10 +14,10 @@
                     <div class="swiper-wrapper">
 
                         @forelse($details['photoUrls'] as $photo)
-{{--                            <div class="swiper-slide">--}}
-{{--                                <img src="{{ $photo }}" class=""  alt="">--}}
-{{--                                <div class="offer_name"><a href="single_listing.html">{{ $details['displayName']['text'] }}</a></div>--}}
-{{--                            </div>--}}
+                            <div class="swiper-slide">
+                                <img src="{{ $photo }}" class=""  alt="">
+                                <div class="offer_name"><a href="single_listing.html">{{ $details['displayName']['text'] }}</a></div>
+                            </div>
                         @empty
                             <div class="swiper-slide">
                                 <img src="{{ asset('storage/places/no_image.jpg') }}" class=""  alt="">

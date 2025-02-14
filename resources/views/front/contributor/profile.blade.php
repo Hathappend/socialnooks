@@ -35,6 +35,12 @@
             <!-- Main Content -->
             <div class="main-content flex-grow-1">
                 <!-- Info Tab -->
+                @if(session()->has('success'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Congratulations!</strong> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="tab-content active" id="tab-info">
                     <h1 class="page-title">Personal Info</h1>
                     @livewire('personal-info', ['user' => $user])

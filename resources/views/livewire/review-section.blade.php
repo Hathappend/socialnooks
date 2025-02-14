@@ -48,7 +48,7 @@
                 <div class="reviews-list">
                     <div class="review-item">
                         <div class="d-flex align-items-start mt-3">
-                            <img src="{{ asset('storage/profiles/'. ($hasReview['user']['photo'] ?? 'user_default.jpg'))}}" alt="User" class="rounded-circle profile-img">
+                            <img src="{{ asset('storage/'. ($hasReview['user']['photo'] ?? 'profiles/user_default.jpg'))}}" alt="User" class="rounded-circle profile-img">
                             <div style="width: 100%;">
                                 <div class="name-and-toogle d-flex justify-content-between">
                                     <h6>{{ $hasReview['user']['name'] }}</h6>
@@ -105,7 +105,7 @@
 
                 <div class="review-item">
                     <div class="d-flex align-items-start">
-                        <img src="{{ asset('storage/profiles/'. ($review['user']['photo'] ?? 'user_default.jpg'))}}" alt="User" class="rounded-circle profile-img">
+                        <img src="{{ asset('storage/'. ($review['user']['photo'] ?? 'profiles/user_default.jpg'))}}" alt="User" class="rounded-circle profile-img">
                         <div style="width: 100%;">
                             <h6>{{ $review['user']['name'] ?? "" }}</h6>
                             <div class="rating-and-time d-flex justify-content-between">

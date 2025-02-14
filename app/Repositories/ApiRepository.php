@@ -40,7 +40,7 @@ class ApiRepository implements ApiRepositoryInterface
                 $params = [
                     'textQuery' => $query,
                     'maxResultCount' => 5,
-                    'includedType' => $category, // Gunakan singular untuk text search
+                    'includedType' => $category,
                     'locationBias' => [
                         'circle' => [
                             'center' => [
@@ -247,8 +247,6 @@ class ApiRepository implements ApiRepositoryInterface
                 throw new Exception('Failed to fetch data from Google Maps API.');
             }
 
-//            dd($response->json());
-
             return $response->json();
         } catch (Exception $e) {
             return [
@@ -341,4 +339,6 @@ class ApiRepository implements ApiRepositoryInterface
     }
 
 
+
 }
+
