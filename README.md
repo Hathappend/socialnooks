@@ -83,7 +83,7 @@ Sebelum menginstal SocialNooks, pastikan perangkat telah menginstal:
 - **Cari tempat** berdasarkan kategori atau lokasi.
 - **Tambahkan tempat** yang belum tersedia di sistem.
 - **Berikan review dan rating** untuk tempat yang telah dikunjungi.
-- **Gunakan fitur peta interaktif** untuk menavigasi lokasi.
+- **Gunakan fitur peta yang interaktif** untuk menavigasi lokasi.
 
 ## Kontribusi
 Jika ingin berkontribusi dalam pengembangan SocialNooks, silakan fork repository ini dan kirimkan pull request.
